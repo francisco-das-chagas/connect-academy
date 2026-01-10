@@ -116,7 +116,7 @@ const About = () => {
           </h2>
 
           <p ref={descRef} className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Um evento exclusivo que reúne profissionais de alto nível para compartilhar experiências 
+            Um espaço exclusivo que reúne profissionais de alto nível para compartilhar experiências 
             reais, estratégias comprovadas e criar conexões que impulsionam carreiras e negócios.
           </p>
         </div>

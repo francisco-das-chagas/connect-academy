@@ -128,7 +128,7 @@ const Hero = () => {
               ref={subtitleRef}
               className="text-lg text-muted-foreground max-w-xl leading-relaxed"
             >
-              Eventos exclusivos que conectam profissionais, compartilham
+              Espaços exclusivos que conectam profissionais, compartilham
               experiências reais e estratégias comprovadas para impulsionar sua
               carreira e seus negócios.
             </p>
