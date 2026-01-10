@@ -87,7 +87,6 @@ const About = () => {
     "Acesso a cases reais de sucesso",
     "Mentoria durante o evento",
     "Coffee break e momentos de integração",
-    "Certificado de participação",
     "Material de apoio completo",
   ];
 

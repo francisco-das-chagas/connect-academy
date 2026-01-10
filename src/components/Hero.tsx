@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 
 const Hero = () => {
@@ -7,38 +7,7 @@ const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-
-  // Countdown state - set your next event date here
-  const [countdown, setCountdown] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    // Set your next event date here
-    const eventDate = new Date("2026-02-15T19:00:00").getTime();
-
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      setCountdown({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-      });
-    };
-
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -69,13 +38,6 @@ const Hero = () => {
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power2.out" },
         "-=0.3"
-      );
-
-      tl.fromTo(
-        statsRef.current?.children || [],
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" },
-        "-=0.2"
       );
 
       tl.fromTo(
@@ -159,29 +121,6 @@ const Hero = () => {
                 Saiba Mais
               </button>
             </div>
-
-            {/* Stats */}
-            <div ref={statsRef} className="flex items-center gap-6 pt-4">
-              <div className="text-center">
-                <span className="text-3xl font-bold gold-gradient-text">{countdown.days}</span>
-                <p className="text-xs text-muted-foreground mt-1">Dias</p>
-              </div>
-              <div className="stat-divider" />
-              <div className="text-center">
-                <span className="text-3xl font-bold gold-gradient-text">{countdown.hours}</span>
-                <p className="text-xs text-muted-foreground mt-1">Horas</p>
-              </div>
-              <div className="stat-divider" />
-              <div className="text-center">
-                <span className="text-3xl font-bold gold-gradient-text">{countdown.minutes}</span>
-                <p className="text-xs text-muted-foreground mt-1">Minutos</p>
-              </div>
-              <div className="stat-divider" />
-              <div className="text-center">
-                <span className="text-3xl font-bold gold-gradient-text">{countdown.seconds}</span>
-                <p className="text-xs text-muted-foreground mt-1">Segundos</p>
-              </div>
-            </div>
           </div>
 
           {/* Right Content - Feature Cards */}
@@ -219,11 +158,11 @@ const Hero = () => {
             <div className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Certificação</h3>
-              <p className="text-sm text-muted-foreground">Comprove sua participação</p>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Investimento Acessível</h3>
+              <p className="text-sm text-muted-foreground">Preços especiais para inscritos antecipados</p>
             </div>
           </div>
         </div>

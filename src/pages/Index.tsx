@@ -3,7 +3,6 @@ import Preloader from "@/components/Preloader";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Benefits from "@/components/Benefits";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
@@ -19,7 +18,6 @@ const Index = () => {
         <main>
           <Hero />
           <About />
-          <Benefits />
           <ContactForm />
         </main>
         <Footer />
