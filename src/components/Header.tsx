@@ -1,85 +1,103 @@
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import logoAcademy from "@/assets/logo-academy.svg";
+
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom' // Importar Link e useLocation
+// ... imports existentes
 
 const Header = () => {
-  const headerRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation() // Para saber em qual página estamos
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        logoRef.current,
-        { x: -50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.8, delay: 2.5, ease: "power2.out" }
-      );
-
-      gsap.fromTo(
-        navRef.current?.children || [],
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 2.7, ease: "power2.out" }
-      );
-
-      gsap.fromTo(
-        ctaRef.current,
-        { x: 50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.8, delay: 3, ease: "power2.out" }
-      );
-    }, headerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
     }
-  };
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Função auxiliar para rolar para âncoras se estiver na home, ou navegar se não estiver
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    if (location.pathname !== '/' && id !== 'reforma') {
+      // Se não estiver na home e clicar em algo que não é a reforma, deixa o Link funcionar normal (vai pra home)
+      return
+    }
+
+    // Se for âncora na mesma página
+    if (location.pathname === '/' && id.startsWith('#')) {
+      e.preventDefault()
+      const element = document.querySelector(id)
+      element?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <header
-      ref={headerRef}
-      className="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-md bg-background/80 border-b border-border/50"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-background/80 backdrop-blur-md py-4 shadow-sm'
+          : 'bg-transparent py-6'
+      }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <div ref={logoRef} className="flex items-center gap-3">
-          <img src={logoAcademy} alt="Connect Academy" className="h-10 w-auto" />
-        </div>
+        <Link to="/" className="text-2xl font-bold flex items-center gap-2">
+          {/* Se certifique de usar o caminho correto da logo */}
+          <img
+            src="./src/assets/logo-academy.svg"
+            alt="Connect Academy"
+            className="h-8 w-auto"
+          />
+        </Link>
 
-        {/* Navigation */}
-        <nav ref={navRef} className="hidden md:flex items-center gap-8">
-          <button
-            onClick={() => scrollToSection("sobre")}
-            className="text-muted-foreground hover:text-primary transition-colors duration-300"
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          <Link
+            to="/"
+            className="text-sm font-medium hover:text-primary transition-colors"
           >
-            Sobre o Evento
-          </button>
-          <button
-            onClick={() => scrollToSection("inscricao")}
-            className="text-muted-foreground hover:text-primary transition-colors duration-300"
+            Início
+          </Link>
+
+          {/* LINK PARA A NOVA ABA */}
+          <Link
+            to="/reforma-tributaria"
+            className={`text-sm font-medium transition-colors px-4 py-2 rounded-full border ${
+              location.pathname === '/reforma-tributaria'
+                ? 'bg-primary/10 text-primary border-primary/20'
+                : 'border-transparent hover:text-primary'
+            }`}
           >
-            Inscrição
+            Próximo encontro
+          </Link>
+
+          <a
+            href="/#sobre"
+            onClick={e => handleNavClick(e, '#sobre')}
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Sobre
+          </a>
+
+          <button
+            onClick={() =>
+              document
+                .getElementById('inscricao')
+                ?.scrollIntoView({ behavior: 'smooth' })
+            }
+            className="btn-gold px-6 py-2 text-sm"
+          >
+            Inscrever-se
           </button>
         </nav>
 
-        {/* CTA Button */}
-        <button
-          ref={ctaRef}
-          onClick={() => scrollToSection("inscricao")}
-          className="btn-gold text-sm px-6 py-3 flex items-center gap-2"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-          Inscreva-se
-        </button>
+        {/* Mobile Menu Button (Simplificado, mantenha o seu existente se houver) */}
+        {/* ... */}
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
