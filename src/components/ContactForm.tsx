@@ -91,13 +91,13 @@ const ContactForm = () => {
 
       // Build WhatsApp message
       const message = `
-🎓 *Nova Inscrição - Connect Academy*
+ *Nova Inscrição - Connect Academy*
 
-👤 *Nome:* ${validatedData.nome}
-📧 *E-mail:* ${validatedData.email}
-📱 *Telefone:* ${validatedData.telefone}
-🏢 *Empresa:* ${validatedData.empresa || "Não informada"}
-💬 *Mensagem:* ${validatedData.mensagem || "Sem mensagem adicional"}
+ *Nome:* ${validatedData.nome}
+ *E-mail:* ${validatedData.email}
+ *Telefone:* ${validatedData.telefone}
+ *Empresa:* ${validatedData.empresa || "Não informada"}
+ *Mensagem:* ${validatedData.mensagem || "Sem mensagem adicional"}
       `.trim();
 
       // WhatsApp number with country code
