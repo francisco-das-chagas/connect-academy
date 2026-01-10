@@ -100,8 +100,8 @@ const ContactForm = () => {
 💬 *Mensagem:* ${validatedData.mensagem || "Sem mensagem adicional"}
       `.trim();
 
-      // Replace with your WhatsApp number (with country code, no + sign)
-      const whatsappNumber = "5511999999999";
+      // WhatsApp number with country code
+      const whatsappNumber = "5588993832512";
       const encodedMessage = encodeURIComponent(message);
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 

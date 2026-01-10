@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import logoAcademy from "@/assets/logo-academy.svg";
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -76,10 +77,9 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
         {/* Logo */}
         <div
           ref={logoRef}
-          className="w-24 h-24 rounded-2xl bg-gold-gradient flex items-center justify-center shadow-2xl"
-          style={{ boxShadow: "0 0 60px hsl(43 96% 56% / 0.4)" }}
+          className="w-32 h-32 flex items-center justify-center"
         >
-          <span className="text-4xl font-bold text-navy-deep">CA</span>
+          <img src={logoAcademy} alt="Connect Academy" className="w-full h-full object-contain" />
         </div>
 
         {/* Text */}

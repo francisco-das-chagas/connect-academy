@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import logoAcademy from "@/assets/logo-academy.svg";
 
 const Header = () => {
   const headerRef = useRef<HTMLElement>(null);
@@ -41,18 +42,12 @@ const Header = () => {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
+      className="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-md bg-background/80 border-b border-border/50"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <div ref={logoRef} className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gold-gradient flex items-center justify-center">
-            <span className="text-lg font-bold text-navy-deep">CA</span>
-          </div>
-          <div className="hidden sm:block">
-            <span className="text-xl font-bold text-foreground">CONNECT</span>
-            <span className="text-xs text-primary ml-1 font-medium tracking-widest">ACADEMY</span>
-          </div>
+          <img src={logoAcademy} alt="Connect Academy" className="h-10 w-auto" />
         </div>
 
         {/* Navigation */}
@@ -62,12 +57,6 @@ const Header = () => {
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             Sobre o Evento
-          </button>
-          <button
-            onClick={() => scrollToSection("beneficios")}
-            className="text-muted-foreground hover:text-primary transition-colors duration-300"
-          >
-            Benefícios
           </button>
           <button
             onClick={() => scrollToSection("inscricao")}
