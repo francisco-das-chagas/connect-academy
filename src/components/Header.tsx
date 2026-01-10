@@ -62,7 +62,7 @@ const Header = () => {
                 : 'border-transparent hover:text-primary'
             }`}
           >
-            Reforma Tributária
+            Próximos Encontros
           </Link>
 
           <a
