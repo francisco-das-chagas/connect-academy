@@ -46,7 +46,7 @@ const Header = () => {
         <Link to="/" className="text-2xl font-bold flex items-center gap-2">
           {/* Se certifique de usar o caminho correto da logo */}
           <img
-            src="./src/assets/logo-academy.svg"
+            src="../assets/logo-academy.svg"
             alt="Connect Academy"
             className="h-8 w-auto"
           />
