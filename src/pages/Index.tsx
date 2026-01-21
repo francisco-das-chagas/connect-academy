@@ -25,6 +25,9 @@ const Index = () => {
   const [selectedEvent, setSelectedEvent] = useState<string>('')
 
   const handleSelectEvent = (eventName: string) => {
+    // Se for o evento esgotado, não faz nada
+    if (eventName === 'Gestão 360º') return
+
     setSelectedEvent(eventName)
     const formSection = document.getElementById('inscricao')
     if (formSection) {
@@ -41,7 +44,8 @@ const Index = () => {
       tag: 'Últimas Vagas',
       spots: '40 vagas',
       image: bgImageReforma,
-      desc: 'Split Payment, IBS, CBS e o impacto real no seu caixa. Prepare sua empresa. 1 Dia + material + certificado'
+      desc: 'Split Payment, IBS, CBS e o impacto real no seu caixa. Prepare sua empresa. 1 Dia + material + certificado',
+      disabled: false
     },
     {
       title: 'Inteligência Artificial',
@@ -50,7 +54,8 @@ const Index = () => {
       tag: 'Imersão Prática',
       spots: '50 vagas por turma',
       image: bgIa,
-      desc: 'Crie agentes de IA, automatize vendas e domine o ChatGPT e Gemini. 2 Dias + material + certificado'
+      desc: 'Crie agentes de IA, automatize vendas e domine o ChatGPT e Gemini. 2 Dias + material + certificado',
+      disabled: false
     },
     {
       title: 'Connect Valley',
@@ -59,7 +64,21 @@ const Index = () => {
       tag: 'Networking Puro',
       spots: null,
       image: bgImageConnect,
-      desc: 'O maior evento de networking e negócios da região Norte do Ceará. (Evento de networking 2º semestre)'
+      desc: 'O maior evento de networking e negócios da região Norte do Ceará. (Evento de networking 2º semestre)',
+      disabled: false
+    },
+    // NOVO CARD ADICIONADO
+    {
+      title: 'Gestão 360º',
+      date: 'Realizado',
+      price: 'Encerrado',
+      tag: 'Edição Anterior',
+      spots: null,
+      // Usando imagem original do unsplash pois não há local definida. Pode alterar se tiver.
+      image:
+        'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop',
+      desc: 'Liderança e estratégias para gestores modernos. Um marco na gestão regional.',
+      disabled: true // Propriedade para controlar o botão
     }
   ]
 
@@ -67,8 +86,8 @@ const Index = () => {
   const combos = [
     {
       name: 'Combo Reforma + Valley',
-      price: 'R$ 1.094,00',
-      parcelas: 'ATE 12x',
+      price: 'R$ 997,00',
+      parcelas: '12x de R$ 99,70',
       features: [
         'Imersão Reforma Tributária',
         'Ingresso Connect Valley',
@@ -80,8 +99,9 @@ const Index = () => {
     {
       name: 'Combo Completo',
       tag: 'Mais Vendido',
-      price: 'R$ 1.967,30',
-      parcelas: 'Até 12x',
+      price: 'R$ 1.497,00',
+      parcelas: '12x de R$ 149,70',
+      economy: 'Economia de R$ 1.000,00',
       features: [
         'Imersão Reforma Tributária',
         'Imersão Inteligência Artificial',
@@ -93,8 +113,8 @@ const Index = () => {
     },
     {
       name: 'Combo IA + Valley',
-      price: 'R$ 1.194,00',
-      parcelas: 'ATE 12x',
+      price: 'R$ 997,00',
+      parcelas: '12x de R$ 99,70',
       features: [
         'Imersão IA (2 dias)',
         'Ingresso Connect Valley',
@@ -105,7 +125,7 @@ const Index = () => {
     }
   ]
 
-  // DIFERENCIAIS (Texto Atualizado)
+  // DIFERENCIAIS
   const differentials = [
     {
       icon: MapPin,
@@ -147,11 +167,16 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Ajustei o grid para 4 colunas para caber todos, ou mantenha 3 e ele quebra linha */}
               {events.map((evt, idx) => (
                 <div
                   key={idx}
-                  className="group relative h-[520px] rounded-3xl overflow-hidden cursor-pointer shadow-xl transition-all hover:scale-[1.02]"
+                  className={`group relative h-[520px] rounded-3xl overflow-hidden shadow-xl transition-all ${
+                    evt.disabled
+                      ? 'grayscale hover:grayscale-0 cursor-default opacity-90'
+                      : 'cursor-pointer hover:scale-[1.02]'
+                  }`}
                   onClick={() => handleSelectEvent(evt.title)}
                 >
                   <div className="absolute inset-0">
@@ -163,37 +188,68 @@ const Index = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-90" />
                   </div>
                   <div className="absolute inset-0 p-8 flex flex-col justify-end items-start text-white">
-                    <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full flex items-center gap-2">
-                      <Ticket className="w-4 h-4 text-primary" />
-                      <span className="text-xs font-bold text-white uppercase tracking-wider">
+                    <div
+                      className={`absolute top-6 right-6 backdrop-blur-md border px-3 py-1 rounded-full flex items-center gap-2 ${evt.disabled ? 'bg-gray-500/20 border-gray-500/30' : 'bg-white/10 border-white/20'}`}
+                    >
+                      <Ticket
+                        className={`w-4 h-4 ${evt.disabled ? 'text-gray-400' : 'text-primary'}`}
+                      />
+                      <span
+                        className={`text-xs font-bold uppercase tracking-wider ${evt.disabled ? 'text-gray-300' : 'text-white'}`}
+                      >
                         {evt.tag}
                       </span>
                     </div>
-                    <p className="text-sm font-semibold text-primary mb-1">
+
+                    <p
+                      className={`text-sm font-semibold mb-1 ${evt.disabled ? 'text-gray-400' : 'text-primary'}`}
+                    >
                       {evt.date}
                     </p>
+
                     {evt.spots && (
                       <span className="inline-flex items-center gap-1.5 px-2 py-0.5 mb-3 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-wide">
                         <AlertCircle className="w-3 h-3" />
                         {evt.spots}
                       </span>
                     )}
-                    <h3 className="text-2xl font-bold mb-3 leading-tight">
+
+                    <h3
+                      className={`text-2xl font-bold mb-3 leading-tight ${evt.disabled ? 'text-gray-300' : 'text-white'}`}
+                    >
                       {evt.title}
                     </h3>
+
                     <div className="mb-4 pt-4 border-t border-white/10 w-full">
                       <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">
                         Investimento
                       </p>
-                      <p className="text-2xl font-bold text-white">
+                      <p
+                        className={`text-2xl font-bold ${evt.disabled ? 'text-gray-400 line-through decoration-red-500/50' : 'text-white'}`}
+                      >
                         {evt.price}
                       </p>
                     </div>
+
                     <p className="text-gray-300 text-sm mb-6 line-clamp-2">
                       {evt.desc}
                     </p>
-                    <button className="flex items-center gap-2 text-sm font-bold text-primary uppercase tracking-widest group-hover:gap-4 transition-all w-full">
-                      Inscrever-se Agora <ArrowRight className="w-4 h-4" />
+
+                    <button
+                      disabled={evt.disabled}
+                      className={`flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all w-full rounded-lg py-3 justify-center ${
+                        evt.disabled
+                          ? 'bg-white/5 text-gray-500 cursor-not-allowed border border-white/5'
+                          : 'text-primary group-hover:gap-4 hover:bg-white/5'
+                      }`}
+                    >
+                      {evt.disabled ? (
+                        'Esgotadas'
+                      ) : (
+                        <>
+                          Inscrever-se Agora <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -274,7 +330,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* NOVA SEÇÃO: CONDIÇÕES ESPECIAIS */}
+        {/* CONDIÇÕES ESPECIAIS */}
         <section className="py-12 px-6 bg-secondary/10 border-b border-white/5">
           <div className="max-w-7xl mx-auto">
             <div className="bg-gradient-to-r from-background to-secondary/20 border border-primary/20 rounded-3xl p-8 md:p-12 relative overflow-hidden">
@@ -360,7 +416,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* NOVA SEÇÃO: DEPOIMENTOS E NÚMEROS */}
+        {/* DEPOIMENTOS E NÚMEROS */}
         <section className="py-24 px-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-secondary/10 -z-10" />
           <div className="max-w-7xl mx-auto">
@@ -373,17 +429,17 @@ const Index = () => {
                 {
                   quote:
                     'Finalmente entendi o que vai mudar no meu negócio com a reforma. Saí com um plano claro do que fazer.',
-                  author: 'Aryolino, Sobral'
+                  author: 'Empresário, Sobral'
                 },
                 {
                   quote:
                     'O evento de IA foi mão na massa. Criei meu primeiro chatbot no próprio evento.',
-                  author: 'David Pelucio, Itapipoca'
+                  author: 'Empresário, Itapipoca'
                 },
                 {
                   quote:
                     'O networking vale mais que o conteúdo. Conheci parceiros que viraram clientes.',
-                  author: 'Raimundo Mercantil, Forquilha'
+                  author: 'Empresário, Forquilha'
                 }
               ].map((depo, i) => (
                 <div
