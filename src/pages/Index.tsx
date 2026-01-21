@@ -20,6 +20,7 @@ import {
 import bgImageConnect from '@/assets/bg-connect-card.png'
 import bgImageReforma from '@/assets/bg-reforma.jpeg'
 import bgIa from '@/assets/bg-inteligencia.png'
+import bg360 from '@/assets/gestao-360.png'
 
 const Index = () => {
   const [selectedEvent, setSelectedEvent] = useState<string>('')
@@ -75,8 +76,7 @@ const Index = () => {
       tag: 'Edição Anterior',
       spots: null,
       // Usando imagem original do unsplash pois não há local definida. Pode alterar se tiver.
-      image:
-        'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop',
+      image: bg360,
       desc: 'Liderança e estratégias para gestores modernos. Um marco na gestão regional.',
       disabled: true // Propriedade para controlar o botão
     }
