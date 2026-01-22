@@ -428,17 +428,17 @@ const Index = () => {
                 {
                   quote:
                     'Finalmente entendi o que vai mudar no meu negócio com a reforma. Saí com um plano claro do que fazer.',
-                  author: 'Empresário, Sobral'
+                  author: 'David, Sobral'
                 },
                 {
                   quote:
                     'O evento de IA foi mão na massa. Criei meu primeiro chatbot no próprio evento.',
-                  author: 'Empresário, Itapipoca'
+                  author: 'Lucas, Itapipoca'
                 },
                 {
                   quote:
                     'O networking vale mais que o conteúdo. Conheci parceiros que viraram clientes.',
-                  author: 'Empresário, Forquilha'
+                  author: 'Luana, Forquilha'
                 }
               ].map((depo, i) => (
                 <div
