@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import LogoImg from '@/assets/logo-academy.svg'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet' // Importando o menu lateral
+import { Menu, X } from 'lucide-react'
+import { Button } from './ui/button'
+import LogoImg from '@/assets/logo-academy.svg' // Importação da logo restaurada
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isOpen, setIsOpen] = useState(false) // Estado para controlar o menu mobile
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
@@ -16,153 +17,115 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    id: string
-  ) => {
-    // Fecha o menu mobile ao clicar
-    setIsOpen(false)
+  const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false)
 
-    if (location.pathname !== '/' && id !== 'reforma') {
-      return
+    // Se não estiver na home, navega para home primeiro (opcional, dependendo da rota)
+    if (location.pathname !== '/' && !id.startsWith('http')) {
+      // Lógica de navegação se necessário
     }
 
-    if (location.pathname === '/' && id.startsWith('#')) {
-      e.preventDefault()
-      const element = document.querySelector(id)
-      element?.scrollIntoView({ behavior: 'smooth' })
+    const element = document.getElementById(id)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     }
   }
 
-  // Links de navegação (reutilizáveis para desktop e mobile)
-  const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
-    <>
-      <Link
-        to="/"
-        className={`text-sm font-medium hover:text-primary transition-colors ${
-          mobile ? 'text-lg py-2' : ''
-        }`}
-        onClick={() => setIsOpen(false)}
-      >
-        Início
-      </Link>
-
-      <Link
-        to="/reforma-tributaria"
-        className={`text-sm font-medium transition-colors rounded-full border ${
-          location.pathname === '/reforma-tributaria'
-            ? 'bg-primary/10 text-primary border-primary/20'
-            : 'border-transparent hover:text-primary'
-        } ${
-          mobile
-            ? 'text-lg py-2 px-0 border-0 bg-transparent text-foreground'
-            : 'px-4 py-2'
-        }`}
-        onClick={() => setIsOpen(false)}
-      >
-        Próximos Encontros
-      </Link>
-
-      <a
-        href="/#eventos"
-        onClick={e => handleNavClick(e, '#eventos')}
-        className={`text-sm font-medium hover:text-primary transition-colors ${
-          mobile ? 'text-lg py-2' : ''
-        }`}
-      >
-        Próximos Encontros
-      </a>
-
-      <a
-        href="/#sobre"
-        onClick={e => handleNavClick(e, '#sobre')}
-        className={`text-sm font-medium hover:text-primary transition-colors ${
-          mobile ? 'text-lg py-2' : ''
-        }`}
-      >
-        Sobre
-      </a>
-    </>
-  )
-
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-background/80 backdrop-blur-md py-4 shadow-sm'
+          ? 'bg-black/80 backdrop-blur-md border-b border-white/10 py-4 shadow-lg' // Fundo escuro ao rolar
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="text-2xl font-bold flex items-center gap-2 z-50"
-        >
-          <img src={LogoImg} alt="Connect Academy" className="h-8 w-auto" />
-        </Link>
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {/* LOGO RESTAURADA */}
+          <Link to="/" onClick={() => scrollToSection('hero')}>
+            <img
+              src={LogoImg}
+              alt="Connect Academy"
+              className="h-10 w-auto object-contain hover:opacity-90 transition-opacity"
+            />
+          </Link>
+        </div>
 
-        {/* Desktop Nav (Escondido no Mobile) */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          <NavLinks />
           <button
-            onClick={() =>
-              document
-                .getElementById('inscricao')
-                ?.scrollIntoView({ behavior: 'smooth' })
-            }
-            className="btn-gold px-6 py-2 text-sm"
+            onClick={() => scrollToSection('hero')}
+            className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
           >
-            Inscrever-se
+            Início
           </button>
+
+          <button
+            onClick={() => scrollToSection('about')}
+            className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+          >
+            Sobre
+          </button>
+
+          <div className="flex items-center gap-4 ml-4">
+            {/* Botão Agenda */}
+            <Button
+              variant="outline"
+              onClick={() => scrollToSection('agenda')}
+              className="border-primary text-primary hover:bg-primary hover:text-white transition-all"
+            >
+              Conheça a Agenda
+            </Button>
+
+            {/* Botão Garantir Vaga */}
+            <Button
+              onClick={() => scrollToSection('contact')}
+              className="bg-secondary hover:bg-secondary/90 text-white shadow-lg hover:shadow-xl transition-all"
+            >
+              Garantir Vaga
+            </Button>
+          </div>
         </nav>
 
-        {/* Mobile Menu (Visível apenas no Mobile) */}
-        <div className="md:hidden">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <button className="p-2 text-foreground hover:text-primary transition-colors">
-                {/* Ícone de Menu Hambúrguer */}
-                <svg
-                  className="w-8 h-8"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-[300px] bg-background/95 backdrop-blur-xl border-l border-primary/20"
-            >
-              <div className="flex flex-col gap-8 mt-10">
-                <nav className="flex flex-col gap-6">
-                  <NavLinks mobile />
-                </nav>
-                <div className="h-px w-full bg-border" />
-                <button
-                  onClick={() => {
-                    setIsOpen(false)
-                    document
-                      .getElementById('inscricao')
-                      ?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="btn-gold w-full py-3 text-base"
-                >
-                  Inscrever-se Agora
-                </button>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 text-white"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X /> : <Menu />}
+        </button>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-black/95 border-b border-white/10 shadow-2xl p-6 md:hidden flex flex-col gap-6 animate-in slide-in-from-top-5">
+          <button
+            onClick={() => scrollToSection('hero')}
+            className="text-left py-2 font-medium text-lg text-gray-300 hover:text-white"
+          >
+            Início
+          </button>
+          <button
+            onClick={() => scrollToSection('agenda')}
+            className="text-left py-2 font-medium text-lg text-gray-300 hover:text-white"
+          >
+            Conheça a Agenda
+          </button>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="w-full bg-secondary text-white py-3 rounded-xl font-bold text-lg shadow-lg"
+          >
+            Garantir Vaga
+          </button>
+        </div>
+      )}
     </header>
   )
 }

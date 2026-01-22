@@ -26,11 +26,11 @@ const Index = () => {
   const [selectedEvent, setSelectedEvent] = useState<string>('')
 
   const handleSelectEvent = (eventName: string) => {
-    // Se for o evento esgotado, não faz nada
     if (eventName === 'Gestão 360º') return
 
     setSelectedEvent(eventName)
-    const formSection = document.getElementById('inscricao')
+    // Corrigido para buscar o ID 'contact'
+    const formSection = document.getElementById('contact')
     if (formSection) {
       formSection.scrollIntoView({ behavior: 'smooth' })
     }
@@ -68,17 +68,15 @@ const Index = () => {
       desc: 'O maior evento de networking e negócios da região Norte do Ceará. (Evento de networking 2º semestre)',
       disabled: false
     },
-    // NOVO CARD ADICIONADO
     {
       title: 'Gestão 360º',
       date: 'Realizado',
       price: 'Encerrado',
       tag: 'Edição Anterior',
       spots: null,
-      // Usando imagem original do unsplash pois não há local definida. Pode alterar se tiver.
       image: bg360,
       desc: 'Liderança e estratégias para gestores modernos. Um marco na gestão regional.',
-      disabled: true // Propriedade para controlar o botão
+      disabled: true
     }
   ]
 
@@ -153,10 +151,13 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground font-sans antialiased">
       <Header />
       <main>
-        <Hero />
+        {/* Adicionado ID HERO */}
+        <section id="hero">
+          <Hero />
+        </section>
 
-        {/* SEÇÃO DE EVENTOS */}
-        <section id="eventos" className="py-24 px-6 relative bg-secondary/5">
+        {/* Alterado ID para AGENDA para o botão funcionar */}
+        <section id="agenda" className="py-24 px-6 relative bg-secondary/5">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 space-y-4">
               <h2 className="text-3xl md:text-5xl font-bold">
@@ -168,7 +169,6 @@ const Index = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Ajustei o grid para 4 colunas para caber todos, ou mantenha 3 e ele quebra linha */}
               {events.map((evt, idx) => (
                 <div
                   key={idx}
@@ -419,7 +419,6 @@ const Index = () => {
         <section className="py-24 px-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-secondary/10 -z-10" />
           <div className="max-w-7xl mx-auto">
-            {/* Depoimentos */}
             <h2 className="text-3xl font-bold text-center mb-12">
               Quem já participou
             </h2>
@@ -459,7 +458,6 @@ const Index = () => {
               ))}
             </div>
 
-            {/* Números */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8 border-t border-white/10 pt-16">
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
@@ -489,8 +487,15 @@ const Index = () => {
           </div>
         </section>
 
-        <About />
-        <ContactForm eventName={selectedEvent} />
+        {/* Adicionado ID ABOUT */}
+        <section id="about">
+          <About />
+        </section>
+
+        {/* Adicionado ID CONTACT para o botão Garantir Vaga */}
+        <section id="contact">
+          <ContactForm eventName={selectedEvent} />
+        </section>
       </main>
       <Footer />
     </div>

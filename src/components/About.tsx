@@ -83,12 +83,13 @@ const About = () => {
   ];
 
   const benefits = [
-    "Networking com profissionais de alto nível",
-    "Acesso a cases reais de sucesso",
-    "Mentoria durante o evento",
-    "Coffee break e momentos de integração",
-    "Material de apoio completo",
-  ];
+    'Networking com profissionais de alto nível',
+    'Acesso a cases reais de sucesso',
+    'Mentoria durante o evento',
+    'Coffee break e momentos de integração',
+    'Material de apoio completo',
+    'Satisfação Garantida'
+  ]
 
   return (
     <section
