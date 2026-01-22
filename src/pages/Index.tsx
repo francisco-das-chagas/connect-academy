@@ -18,7 +18,7 @@ import {
   MapPin
 } from 'lucide-react'
 import bgImageConnect from '@/assets/bg-connect-card.png'
-import bgImageReforma from '@/assets/bg-reforma.jpeg'
+import bgImageReforma from '@/assets/bg-reforma.jpg'
 import bgIa from '@/assets/bg-inteligencia.png'
 import bg360 from '@/assets/gestao-360.png'
 
@@ -86,8 +86,8 @@ const Index = () => {
   const combos = [
     {
       name: 'Combo Reforma + Valley',
-      price: 'R$ 997,00',
-      parcelas: '12x de R$ 99,70',
+      price: 'R$ 1.094,00',
+      parcelas: '12x de R$ 19,16',
       features: [
         'Imersão Reforma Tributária',
         'Ingresso Connect Valley',
@@ -99,8 +99,8 @@ const Index = () => {
     {
       name: 'Combo Completo',
       tag: 'Mais Vendido',
-      price: 'R$ 1.497,00',
-      parcelas: '12x de R$ 149,70',
+      price: 'R$ 1.967,00',
+      parcelas: '12x de R$ 163,91',
       economy: 'Economia de R$ 1.000,00',
       features: [
         'Imersão Reforma Tributária',
@@ -113,8 +113,8 @@ const Index = () => {
     },
     {
       name: 'Combo IA + Valley',
-      price: 'R$ 997,00',
-      parcelas: '12x de R$ 99,70',
+      price: 'R$ 1.194,00',
+      parcelas: '12x de R$ 99,50',
       features: [
         'Imersão IA (2 dias)',
         'Ingresso Connect Valley',
@@ -335,7 +335,6 @@ const Index = () => {
           <div className="max-w-7xl mx-auto">
             <div className="bg-gradient-to-r from-background to-secondary/20 border border-primary/20 rounded-3xl p-8 md:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
-
               <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center md:text-left">
                 Condições <span className="gold-gradient-text">Exclusivas</span>
               </h3>
