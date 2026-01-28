@@ -461,7 +461,7 @@ const Index = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8 border-t border-white/10 pt-16">
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
-                  +1000
+                  +100
                 </div>
                 <p className="text-primary text-sm font-bold uppercase tracking-wider">
                   Empresários Impactados
