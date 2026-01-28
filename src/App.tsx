@@ -7,27 +7,31 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Index from './pages/Index'
 import ReformaTributaria from './pages/ReformaTributaria'
 import NotFound from './pages/NotFound'
-import Preloader from '@/components/Preloader' // Importando o Preloader
+import Preloader from '@/components/Preloader'
 
 const queryClient = new QueryClient()
 
 const App = () => {
-  // Estado para controlar o Preloader
-  const [isLoading, setIsLoading] = useState(true)
+  // ALTERAÇÃO AQUI:
+  // Inicializa o estado verificando a largura da tela.
+  // Se for < 768px (Mobile), isLoading começa como FALSE.
+  // Se for >= 768px (Desktop), isLoading começa como TRUE.
+  const [isLoading, setIsLoading] = useState(() => window.innerWidth >= 768)
 
   useEffect(() => {
-    // Simula um tempo de carregamento (2 segundos) para exibir o preloader
+    // Se não estiver carregando (ou seja, é mobile), não cria o timer.
+    if (!isLoading) return
+
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 2000)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [isLoading])
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {/* Lógica: Se estiver carregando, mostra o Preloader. Se não, mostra o App */}
         {isLoading ? (
           <Preloader />
         ) : (
