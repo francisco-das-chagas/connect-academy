@@ -8,10 +8,9 @@ import Preloader from '@/components/Preloader'
 
 // --- O SEGREDO DA VELOCIDADE ---
 // O 'lazy' diz ao React: "Só baixe esse arquivo se o usuário for para essa página"
-const Index = lazy(() => import('./pages/Index'))
+const Index = lazy(() => import('./pages/Home'))
 const ReformaTributaria = lazy(() => import('./pages/ReformaTributaria'))
-const NotFound = lazy(() => import('./pages/NotFound'))
-
+const NotFound = lazy(() => import('./pages/Notfound'))
 const queryClient = new QueryClient()
 
 const App = () => {
