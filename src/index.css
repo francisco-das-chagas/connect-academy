@@ -1,0 +1,171 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Connect Academy Design System */
+    --background: 220 60% 8%;
+    --foreground: 45 100% 96%;
+
+    --card: 220 50% 12%;
+    --card-foreground: 45 100% 96%;
+
+    --popover: 220 50% 12%;
+    --popover-foreground: 45 100% 96%;
+
+    --primary: 43 96% 56%;
+    --primary-foreground: 220 60% 8%;
+
+    --secondary: 220 45% 18%;
+    --secondary-foreground: 45 100% 96%;
+
+    --muted: 220 40% 20%;
+    --muted-foreground: 220 20% 60%;
+
+    --accent: 43 96% 56%;
+    --accent-foreground: 220 60% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 40% 20%;
+    --input: 220 40% 20%;
+    --ring: 43 96% 56%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gold: 43 96% 56%;
+    --gold-light: 43 100% 70%;
+    --gold-dark: 43 80% 40%;
+    --navy-deep: 220 60% 8%;
+    --navy: 220 50% 12%;
+    --navy-light: 220 45% 18%;
+    
+    /* Glass effect */
+    --glass-bg: 220 50% 15%;
+    --glass-border: 220 40% 25%;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(43 96% 56%), hsl(43 100% 70%));
+    --gradient-navy: linear-gradient(180deg, hsl(220 60% 8%), hsl(220 50% 4%));
+    --gradient-radial: radial-gradient(ellipse at top right, hsl(220 45% 15%) 0%, transparent 50%);
+  }
+
+  .dark {
+    --background: 220 60% 8%;
+    --foreground: 45 100% 96%;
+    --card: 220 50% 12%;
+    --card-foreground: 45 100% 96%;
+    --popover: 220 50% 12%;
+    --popover-foreground: 45 100% 96%;
+    --primary: 43 96% 56%;
+    --primary-foreground: 220 60% 8%;
+    --secondary: 220 45% 18%;
+    --secondary-foreground: 45 100% 96%;
+    --muted: 220 40% 20%;
+    --muted-foreground: 220 20% 60%;
+    --accent: 43 96% 56%;
+    --accent-foreground: 220 60% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 40% 20%;
+    --input: 220 40% 20%;
+    --ring: 43 96% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-outfit antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-glass-border rounded-2xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .gold-gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(43 96% 56%), hsl(43 100% 70%));
+  }
+
+  .geometric-shape {
+    @apply absolute pointer-events-none;
+    background: linear-gradient(135deg, hsl(43 96% 56% / 0.3), hsl(43 100% 70% / 0.1));
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  .gold-border {
+    @apply border border-primary/30;
+  }
+
+  .btn-gold {
+    @apply bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300;
+    box-shadow: 0 4px 20px hsl(43 96% 56% / 0.3);
+  }
+
+  .btn-gold:hover {
+    @apply scale-105;
+    box-shadow: 0 8px 30px hsl(43 96% 56% / 0.5);
+  }
+
+  .btn-outline-gold {
+    @apply border-2 border-primary text-primary font-semibold px-8 py-4 rounded-xl transition-all duration-300 bg-transparent;
+  }
+
+  .btn-outline-gold:hover {
+    @apply bg-primary/10 scale-105;
+  }
+
+  .stat-divider {
+    @apply w-px h-12 bg-gradient-to-b from-transparent via-primary/50 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Preloader styles */
+.preloader {
+  @apply fixed inset-0 z-[100] flex items-center justify-center;
+  background: hsl(220 60% 8%);
+}
+
+.preloader-hidden {
+  pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(220 60% 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(43 96% 56% / 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(43 96% 56% / 0.8);
+}
