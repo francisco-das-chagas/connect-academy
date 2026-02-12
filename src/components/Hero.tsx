@@ -109,6 +109,7 @@ const Hero = () => {
               ref={subtitleRef}
               className="text-lg text-gray-400 max-w-xl leading-relaxed"
             >
+<<<<<<< HEAD
               Dois pilares fundamentais vão redefinir o mercado:
               <span className="text-gold font-semibold">
                 {' '}
@@ -122,6 +123,23 @@ const Hero = () => {
               .
               <br className="hidden md:block" />
               Prepare sua empresa hoje para liderar amanhã.
+=======
+              O futuro dos negócios é de quem aprende rápido, se adapta e evolui
+              com propósito. Crescer é um processo e começa com a decisão de não
+              permanecer o mesmo.
+              <span className="text-gold font-semibold">
+                {' '}
+                
+              </span>{' '}
+            
+              <span className="text-gold font-semibold">
+                {' '}
+                
+              </span>
+             
+              <br className="hidden md:block" />
+             
+>>>>>>> 26d4ed83c33e7cf8dafcce367b8ca697f1a3b2fb
             </p>
 
             {/* Botões */}
