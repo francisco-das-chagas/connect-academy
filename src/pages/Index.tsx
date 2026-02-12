@@ -50,7 +50,7 @@ const Index = () => {
     },
     {
       title: 'Inteligência Artificial',
-      date: '06 e 07 de Junho de 2026',
+      date: '06 ou 07 de Junho de 2026',
       price: 'R$ 987,00',
       tag: 'Imersão Prática',
       spots: '50 vagas por turma',
@@ -258,77 +258,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SEÇÃO DE COMBOS */}
-        <section className="py-24 px-6 bg-background relative border-y border-white/5">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -z-10" />
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Combos Especiais
-              </h2>
-              <p className="text-muted-foreground">
-                Garanta o melhor custo-benefício levando os pacotes completos.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8 items-start">
-              {combos.map((combo, i) => (
-                <div
-                  key={i}
-                  className={`relative p-8 rounded-3xl border transition-all duration-300 flex flex-col ${combo.highlight ? 'border-primary bg-primary/10 shadow-2xl shadow-primary/10 scale-105 z-10' : 'border-white/10 bg-secondary/20 hover:border-white/20'}`}
-                >
-                  {combo.highlight && (
-                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary via-yellow-400 to-primary text-black text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                      {combo.tag}
-                    </span>
-                  )}
-                  <div className="mb-6">
-                    <h3 className="text-xl font-bold mb-2 text-foreground">
-                      {combo.name}
-                    </h3>
-                    <div className="space-y-1">
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-sm text-muted-foreground">
-                          Valor:
-                        </span>
-                        <span className="text-3xl md:text-4xl font-bold text-primary">
-                          {combo.price}
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                        {combo.parcelas}
-                      </p>
-                    </div>
-                    {combo.economy && (
-                      <div className="mt-3 inline-block bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">
-                        {combo.economy}
-                      </div>
-                    )}
-                  </div>
-                  <ul className="space-y-4 mb-8 flex-1">
-                    {combo.features.map((feat, j) => (
-                      <li
-                        key={j}
-                        className="flex items-start gap-3 text-sm text-muted-foreground"
-                      >
-                        <Check
-                          className={`w-5 h-5 shrink-0 ${combo.highlight ? 'text-primary' : 'text-gray-500'}`}
-                        />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={() => handleSelectEvent(combo.name)}
-                    className={`w-full py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 group ${combo.highlight ? 'btn-gold text-black shadow-lg shadow-primary/20' : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'}`}
-                  >
-                    Quero este Combo{' '}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+   
 
         {/* CONDIÇÕES ESPECIAIS */}
         <section className="py-12 px-6 bg-secondary/10 border-b border-white/5">
