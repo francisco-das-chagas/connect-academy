@@ -3,31 +3,20 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-<<<<<<< HEAD
-// https://vitejs.dev/config/
-=======
->>>>>>> 26d4ed83c33e7cf8dafcce367b8ca697f1a3b2fb
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
   },
-<<<<<<< HEAD
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-=======
   plugins: [
     react(),
     mode === "development" && componentTagger()
   ].filter(Boolean),
->>>>>>> 26d4ed83c33e7cf8dafcce367b8ca697f1a3b2fb
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-<<<<<<< HEAD
-}));
-=======
   build: {
     // 1. Minificar o código ao máximo
     minify: 'terser',
@@ -46,4 +35,3 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 1000, 
   },
 }));
->>>>>>> 26d4ed83c33e7cf8dafcce367b8ca697f1a3b2fb
